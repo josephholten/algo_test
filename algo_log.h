@@ -9,12 +9,13 @@
 #include <chrono>
 #include <string>
 #include <nlohmann/json.hpp>
+#include <fstream>
 
 class algo_log : public nlohmann::json {
 public:
     using clock = std::chrono::steady_clock;
     using time_point = clock::time_point;
-    using duration = clock::duration;
+    using duration = std::chrono::duration<float>;
 
     algo_log(algo_log const&) = delete;
     void operator=(algo_log const&) = delete;
@@ -36,6 +37,7 @@ public:
     duration end_timer() {
         if (timer_running) {
             time = clock::now() - timer_start;
+            (*this)["time"] = time.count();
             return time;
         } else
             return duration::zero();
@@ -49,7 +51,7 @@ public:
     }
 
     void write(std::string fname) {
-        std::ofstream file(fname);
+        std::ofstream file(fname.c_str());
         file << *this;
     }
 
