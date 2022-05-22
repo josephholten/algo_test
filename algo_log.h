@@ -50,9 +50,10 @@ public:
             return time;
     }
 
-    void write(std::string fname) {
+    void write(std::string fname, bool dump = true, int spacing = 2) {
         std::ofstream file(fname.c_str());
-        file << *this;
+        file << std::setw(spacing) << *this;
+        if (dump) this->dump();
     }
 
     void instance(std::string name) {
@@ -62,6 +63,10 @@ public:
     template<typename weight>
     void solution(weight w) {
         (*this)["solution"] = w;
+    }
+
+    void dump(int spacing = 2) {
+        std::cout << std::setw(spacing) << *this << std::endl;
     }
 
 private:
