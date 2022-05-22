@@ -27,6 +27,7 @@ public:
 
     void set_name(std::string _algo_name) {
         algo_name = std::move(algo_name);
+        (*this)["name"] = algo_name;
     }
 
     void start_timer() {
