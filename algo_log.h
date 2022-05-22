@@ -53,7 +53,9 @@ public:
     void write(std::string fname, bool dump = true, int spacing = 2) {
         std::ofstream file(fname.c_str());
         file << std::setw(spacing) << *this;
-        if (dump) this->dump();
+        if (spacing > 0)
+            file << std::endl;
+        if (dump) this->dump(spacing);
     }
 
     void instance(std::string name) {
