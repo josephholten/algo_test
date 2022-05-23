@@ -52,6 +52,7 @@ public:
     }
 
     void write(std::string fname, bool dump = true, int spacing = 2) {
+        (*this)["log_file"] = fname;
         std::ofstream file(fname.c_str());
         file << std::setw(spacing) << *this;
         if (spacing > 0)
