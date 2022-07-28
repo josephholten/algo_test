@@ -45,7 +45,7 @@ public:
     }
 
     duration get_time() {
-        if (!timer_running)
+        if (timer_running)
             return clock::now() - timer_start;
         else
             return time;
